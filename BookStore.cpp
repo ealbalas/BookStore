@@ -12,7 +12,7 @@ namespace CPSC131::BookStore
 
     void BookStore::adjustAccountBalance(int adjustment)
     {
-        account_balance_ +=adjustment;
+        account_balance_ += adjustment;
     }
 
     int BookStore::getAccountBalance()
@@ -21,32 +21,39 @@ namespace CPSC131::BookStore
     }
 
     DoublyLinkedList::DoublyLinkedList<Book>::Iterator BookStore::findBook(string isbn)
-    {}
+    {
+    }
 
     bool BookStore::bookExists(string isbn)
-    {}
+    {
+    }
 
     size_t BookStore::getBookStock(string isbn)
-    {}
+    {
+    }
 
-    Book& BookStore::getBook(string isbn)
-    {}
+    Book &BookStore::getBook(string isbn)
+    {
+    }
 
-    void BookStore::purchaseInventory(const Book& book)
-    {}
+    void BookStore::purchaseInventory(const Book &book)
+    {
+    }
 
     void BookStore::purchaseInventory(
         string title, string author, string isbn,
         size_t price_in_cents,
-        size_t unit_count
-    )
-    {}
+        size_t unit_count)
+    {
+    }
 
-    void BookStore::sellToCustomer(Book& book, size_t price_in_cents, size_t quantity)
-    {}
+    void BookStore::sellToCustomer(Book &book, size_t price_in_cents, size_t quantity)
+    {
+    }
 
     void BookStore::sellToCustomer(string isbn, size_t price_in_cents, size_t quantity)
-    {}
+    {
+    }
 
     void BookStore::printInventroy()
     {
@@ -55,9 +62,9 @@ namespace CPSC131::BookStore
         {
             string title = books.getTitle();
             cout << "\"" << books.getTitle() << "\""
-            << ", by " << books.getAuthor()
-            << " [" << books.getIsbn() << "] "
-            << "(" << books.getStock() << " in stock)" << endl;
+                 << ", by " << books.getAuthor()
+                 << " [" << books.getIsbn() << "] "
+                 << "(" << books.getStock() << " in stock)" << endl;
         }
     }
 }
