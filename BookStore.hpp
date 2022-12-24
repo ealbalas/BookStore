@@ -35,7 +35,7 @@ namespace CPSC131
             void printInventroy();
 
         private:
-            ::CPSC131::DoublyLinkedList : DoublyLinkedList<Book> bookList;
+            ::CPSC131::DoublyLinkedList::DoublyLinkedList<Book> bookList;
 
             int account_balance_ = 0;
         };

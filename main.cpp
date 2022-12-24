@@ -4,7 +4,9 @@
 
 using namespace std;
 using CPSC131::BookStore::BookStore;
-using CPSC131::Book;
+using CPSC131::BookStore::Book;
+using CPSC131::DoublyLinkedList::Node;
+using CPSC131::DoublyLinkedList::DoublyLinkedList;
 
 void menuLoop();
 void purchaseInventory();
@@ -26,7 +28,7 @@ int main()
  
  void menuLoop()
  {
-  while (ture)
+  while (true)
   {
     auto balance = store.getAccountBalance();
     
@@ -57,4 +59,89 @@ int main()
    }
    
    void purchaseInventory()
-   {};
+   {
+      string title, author, isbn;
+	    size_t price_cents, quantity;
+	
+	//
+	    cout
+		    << "Purchasing inventory ..." << endl
+		    << endl
+		    << "Enter book ISBN: "
+		    ;
+	    isbn = getLine();
+	
+	//
+	    if ( !store.bookExists(isbn) ) 
+      {
+		    cout << "Enter title: ";
+		    title = getLine();
+		    cout << "Enter author: ";
+		    author = getLine();
+	    }
+	
+	//
+	    cout << "Enter wholesale price (in cents): ";
+	    price_cents = stoi(getLine());
+	    cout << "Enter quantity: ";
+	    quantity = stoi(getLine());
+	
+	//
+	    store.purchaseInventory(
+		    title, author, isbn,
+		    price_cents,
+		    quantity
+	    );
+}
+
+
+//
+void viewInventory()
+{
+  store.printInventory();
+}
+
+
+//
+void sellToCustomer()
+{
+	cout << "Selling to customer ..." << endl;
+	
+	string isbn;
+	cout << "Enter the ISBN of the book to sell: ";
+	isbn = getLine();
+
+	size_t price;
+	cout << "Enter the price per copy, in cents: ";
+	price = stoi(getLine());
+	
+	size_t quantity;
+	cout << "Enter the quantity to sell: ";
+	quantity = stoi(getLine());
+	
+	try
+	{
+		store.sellToCustomer(isbn, price, quantity);
+		cout << "Sale was successful" << endl;
+		cout << "Sold " << quantity << " copies of ISBN:" << isbn << " at " << price << " cents each" << endl;
+	}
+	catch( const std::exception& e )
+	{
+		cout << "Failed to sell to customer: " << e.what() << endl;
+	}
+}
+
+//
+string getLine()
+{
+	const size_t BUFFER_SIZE = 8192;
+	char buffer[BUFFER_SIZE];
+	
+	cin.clear();
+	cin.getline(buffer, BUFFER_SIZE);
+	
+	string s = buffer;
+	
+	return s;
+}
+

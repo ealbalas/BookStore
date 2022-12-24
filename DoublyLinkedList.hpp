@@ -84,48 +84,96 @@ namespace CPSC131
                 }
                 Node<T> *begin()
                 {
+                    begin_itr = Iterator(this->head_, this->tail_, this->head_);
+                    return itr.getCursor();
                 }
                 Node<T> *end()
                 {
+                    return nullptr;
                 }
                 Node<T> *getCursor()
                 {
+                    return this->cursor_;
                 }
                 Iterator &operator=(const Iterator &other)
                 {
+                    Node<T> *head_copy = other.head_;
+                    Node<T> *tail_copy = other.tail_;
+                    Node<T> *cursor_copy = other.cursor_;
+                    return Iterator(head_copy, tail_copy, cursor_copy);
                 }
                 bool operator==(const Iterator &other)
                 {
+                    if (this->head_ == other.head_
+                        && this->tail_ == other.tail_
+                        && this->cursor_ == other.cursor_)
+                        return true;
+                    return false;
                 }
                 bool operator!=(const Iterator &other)
                 {
+                    return !(operator==(other));
                 }
+                //prefix
                 Iterator &operator++()
                 {
+                    this->cursor_ = this->cursor_->getNext();
+                    return *this;
                 }
+                //postfix
                 Iterator operator++(int)
                 {
+                    Iterator itr(*this);
+                    *this++;
+                    return itr;
+
                 }
                 Iterator &operator--()
                 {
+                    this->cursor_ = this->cursor_->getPrev();
+                    return *this;
                 }
                 Iterator operator--(int)
                 {
+                    Iterator itr(*this);
+                    *this--;
+                    return itr;
                 }
                 Iterator operator+=(size_t add)
                 {
+                    for (size_t i = 0; i < add; i++) ++(*this);
+                    return *this;
                 }
                 Iterator operator-=(size_t subtract)
                 {
+                    for (size_t i = 0; i < subtract; i++) --(*this);
+                    return *this;
                 }
                 Iterator operator+=(int add)
                 {
+                    if (add >= 0)
+                    {
+                        for (int i = 0; i < add; i++) *this++;
+                    }
+                    else
+                    {
+                        for (int j = 0; j > add; j--) *this--;
+                    }
                 }
                 Iterator operator-=(int subtract)
                 {
+                    if (subtract >= 0)
+                    {
+                        for (int i = 0; i < subtract; i++) *this--;
+                    }
+                    else
+                    {
+                        for (int j = 0; j > subtract; j--) *this++;
+                    }
                 }
                 T &operator*()
                 {
+                    return this->cursor_->getElement();
                 }
 
             private:
