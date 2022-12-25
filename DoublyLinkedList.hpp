@@ -84,8 +84,8 @@ namespace CPSC131
                 }
                 Node<T> *begin()
                 {
-                    begin_itr = Iterator(this->head_, this->tail_, this->head_);
-                    return itr.getCursor();
+                    Iterator begin_itr = Iterator(this->head_, this->tail_, this->head_);
+                    return begin_itr.getCursor();
                 }
                 Node<T> *end()
                 {
@@ -188,6 +188,7 @@ namespace CPSC131
 
             DoublyLinkedList(DoublyLinkedList &other)
             {
+
             }
 
             ~DoublyLinkedList()
@@ -214,6 +215,11 @@ namespace CPSC131
 
             Iterator begin()
             {
+                Node<T> * head = this->head_;
+                Node<T> *tail = this->tail_;
+                Node<T> *cursor = this->head_;
+                return Iterator(head, tail, cursor);
+
             }
 
             Iterator last()
@@ -238,6 +244,10 @@ namespace CPSC131
 
             void clear()
             {
+                while (!this->empty())
+                {
+                    this->pop_front();
+                }
             }
 
             Iterator insert_after(Iterator pos, const T &value)
@@ -248,6 +258,7 @@ namespace CPSC131
             }
             Iterator erase(Iterator pos)
             {
+                
             }
             Iterator push_after(Iterator pos, const T &value)
             {
@@ -258,6 +269,7 @@ namespace CPSC131
             Iterator push_back(const T &value)
             {
             }
+            //use erase function
             void pop_front()
             {
             }
